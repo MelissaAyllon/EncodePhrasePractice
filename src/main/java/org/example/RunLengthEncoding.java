@@ -30,11 +30,30 @@ public class RunLengthEncoding {
         return encodePhrase.toString();
     }
 
-    public void decode(String phrase){
+    public String decode(String phrase){
 
         StringBuilder decodePhr = new StringBuilder("");
-        for(int i = 0; i<phrase.length();i++){
+        int i = 0;
 
+        //Se recorre la phrase para decodificar
+        while (i < phrase.length()){
+
+            //si es un digito
+            if (Character.isDigit(phrase.charAt(i))){
+                int j = 1;
+                while(j <= Character.getNumericValue(phrase.charAt(i))) {
+                    decodePhr.append(phrase.charAt(i + 1)); //se debe agregar tantas veces este en el numero anterior
+                    j++;
+                }
+                i +=2;
+            }
+
+            //si no es un digito
+            else{
+                decodePhr.append(phrase.charAt(i));
+                i++;
+            }
         }
+        return decodePhr.toString();
     }
 }
